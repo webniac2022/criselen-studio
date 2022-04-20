@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import Link from '../link/link';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
 import { useAppContext } from '../../context/context';
 import Navbar from '../navbar/navbar';
 import SideDrawer from '../sidedrawer/sidedrawer';
@@ -15,9 +13,10 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Logo from '../logo/logo';
 import Stack from '@mui/material/Stack';
+import SwitchTheme from '../switch-theme-component/switch-theme';
 
 function Header() {
-  const { toggleTheme, mode, services } = useAppContext();
+  const { services } = useAppContext();
 
   return (
     <>
@@ -58,23 +57,7 @@ function Header() {
                 </IconButton>
               </Grid>
               <Grid item>
-                <IconButton
-                  onClick={toggleTheme}
-                  sx={{ height: 40 }}
-                  aria-label="light mode dark mode icon"
-                >
-                  {mode === 'light' ? (
-                    <LightModeIcon
-                      sx={{ fill: '#FF0000' }}
-                      aria-label="Light mode icon"
-                    />
-                  ) : (
-                    <DarkModeIcon
-                      sx={{ fill: '#F0E68C' }}
-                      aria-label="Dark mode icon"
-                    />
-                  )}
-                </IconButton>
+                <SwitchTheme />
               </Grid>
               <Grid item component="div">
                 <Navbar navLinks={services} />

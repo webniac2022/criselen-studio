@@ -12,22 +12,20 @@ class MyDocument extends Document {
           <meta name="description" content="Servicii de design Cluj" />
           <meta name="description" content="Design HORECA" />
           <meta name="description" content="Designer interior Cluj" />
-
           <link rel="shortcut icon" href="/favicon.ico" />
-
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossOrigin={true.toString()}
+            crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Mali:wght@200&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100&display=swap"
             rel="stylesheet"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
           {this.props.emotionStyleTags}
         </Head>

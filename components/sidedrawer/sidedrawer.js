@@ -75,18 +75,13 @@ function SideDrawer({ navLinks }) {
       >
         {state.left ? (
           <motion.div
-            initial={{ rotateX: 0 }}
-            animate={{ rotateX: 180, rotateY: 140 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            animate={{ rotateZ: 120, rotateY: 30 }}
+            transition={{ duration: 0.35, ease: 'easeIn' }}
           >
             <CloseIcon fontSize="large" />
           </motion.div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          >
+          <motion.div transition={{ duration: 0.35, ease: 'easeOut' }}>
             <Menu fontSize="large" />
           </motion.div>
         )}

@@ -46,7 +46,7 @@ const ThemeWrapper = ({ children }) => {
       createTheme({
         ...getDesignTokens(mode),
         typography: {
-          fontFamily: ['Mali', 'cursive'].join(','),
+          fontFamily: ['Montserrat Alternates', 'sans-serif'].join(','),
           subtitle1: {
             color: mode === 'dark' ? '#ffffff' : 'rgba(23, 21, 22, 0.8)',
           },

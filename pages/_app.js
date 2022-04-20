@@ -34,7 +34,7 @@ function MyApp(props) {
               initial={{ opacity: 0, z: -200 }}
               animate={{ opacity: 1, z: 0 }}
               transition={{
-                duration: 1.5,
+                duration: 1,
                 ease: 'easeIn',
                 bounce: 100,
                 damping: 20,
