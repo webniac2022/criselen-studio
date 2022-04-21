@@ -3,6 +3,7 @@ import * as contentful from 'contentful';
 import IndividualImgList from '../components/individual-project-image-list/individual-image-list';
 import Grid from '@mui/material/Grid';
 import Head from 'next/head';
+import Header from '../components/header/header';
 
 function Project({ projectArr: { items } }) {
   const router = useRouter();
@@ -22,6 +23,7 @@ function Project({ projectArr: { items } }) {
 
   return (
     <>
+      <Header />
       <Head>
         <title>{project}</title>
         <meta name="description" content={`Design interior Cluj ${project}`} />

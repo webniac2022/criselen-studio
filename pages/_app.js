@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Footer from '../components/footer/footer';
 import { AppWrapper } from '../context/context';
 import ThemeWrapper from '../components/theme-wrapper/theme-wrapper';
-import Header from '../components/header/header';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
 
@@ -29,7 +28,6 @@ function MyApp(props) {
         <ParallaxProvider>
           <ThemeWrapper>
             <CssBaseline />
-            <Header />
             <motion.main
               initial={{ opacity: 0, z: -200 }}
               animate={{ opacity: 1, z: 0 }}

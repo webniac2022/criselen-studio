@@ -6,6 +6,10 @@ const AppContext = createContext();
 export function AppWrapper({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [mode, setMode] = useState('dark');
+  const [carouselInfo, setCarouselInfo] = useState({
+    images: [],
+    currentIndex: 0,
+  });
 
   const [services, setServices] = useState([
     { title: 'Acasa', path: '/', tabIndex: 0 },
@@ -29,6 +33,8 @@ export function AppWrapper({ children }) {
 
   const appState = {
     isSidebarOpen,
+    carouselInfo,
+    setCarouselInfo,
     openSidebar,
     closeSidebar,
     services,

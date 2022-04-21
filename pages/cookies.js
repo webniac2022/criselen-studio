@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import classes from '../styles/globals.module.css';
+import Header from '../components/header/header';
 
 const myLoader = ({ src, width, quality }) => {
   return `https:${src}?w=${width}&q=${quality || 95}`;
@@ -33,36 +34,41 @@ function CookiesPage({ cookies: { items } }) {
     },
   };
   return (
-    <Grid container mb={10}>
-      <Grid item container justifyContent="center" mt={5} mb={5}>
-        <Typography variant="h2">{title}</Typography>
+    <>
+      <Header />
+      <Grid container mb={10}>
+        <Grid item container justifyContent="center" mt={5} mb={5}>
+          <Typography variant="h2">{title}</Typography>
+        </Grid>
+        <Grid
+          item
+          container
+          sx={{ display: 'block', width: '100vw' }}
+          justifyContent="center"
+          p={4}
+        >
+          <Image
+            src={hero}
+            alt="hero"
+            width={400}
+            height={300}
+            layout="responsive"
+            className={classes.gimg}
+            loader={myLoader}
+            priority
+          />
+        </Grid>
+        <Grid item container p={4}>
+          {content.map((c, i) => {
+            return (
+              <div key={`${c}-${i}`}>
+                {documentToReactComponents(c, options)}
+              </div>
+            );
+          })}
+        </Grid>
       </Grid>
-      <Grid
-        item
-        container
-        sx={{ display: 'block', width: '100vw' }}
-        justifyContent="center"
-        p={4}
-      >
-        <Image
-          src={hero}
-          alt="hero"
-          width={400}
-          height={300}
-          layout="responsive"
-          className={classes.gimg}
-          loader={myLoader}
-          priority
-        />
-      </Grid>
-      <Grid item container p={4}>
-        {content.map((c, i) => {
-          return (
-            <div key={`${c}-${i}`}>{documentToReactComponents(c, options)}</div>
-          );
-        })}
-      </Grid>
-    </Grid>
+    </>
   );
 }
 

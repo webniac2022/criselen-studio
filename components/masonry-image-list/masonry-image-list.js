@@ -1,72 +1,103 @@
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Image from 'next/image';
-import Container from '@mui/material/Container';
 import Link from '../link/link';
 import classes from '../../styles/globals.module.css';
+import Stack from '@mui/material/Stack';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { placeholderImg } from '../../utils/blurData';
 import { motion } from 'framer-motion';
+import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
 
 const myLoader = ({ src, quality }) => {
   return `https:${src}?q=${quality || 95}`;
 };
 
 function MasonryList({ itemData }) {
+  const mediumHeight =
+    itemData.reduce((first, second) => first + second.height, 0) /
+    itemData.length;
+  const mediumWidth =
+    itemData.reduce((first, second) => first + second.width, 0) /
+    itemData.length;
   return (
-    <Box component={Container} mt={5}>
-      <ImageList
-        variant="standard"
-        rows={3}
-        cols={2}
-        gap={8}
-        sx={{ overflow: 'hidden' }}
-      >
-        {itemData.map((item, i) => (
-          <motion.div
-            key={item.url}
-            initial={{ opacity: 0 }}
-            whileInView={{
-              opacity: 1,
-              transition: {
-                type: 'spring',
-                bounce: 0.25,
-                duration: 2,
-                delay: i * 0.2,
-                ease: 'easeIn',
-              },
+    <Grid item container spacing={1} mt={5} p={1} mb={5}>
+      {itemData.map((item, index) => {
+        return (
+          <Grid
+            item
+            component={Link}
+            href={`/${item.project}`}
+            key={`${item.title}-${index}`}
+            sx={{
+              display: 'block',
+              position: 'relative',
             }}
-            viewport={{ once: true }}
+            xs={6}
           >
-            <ImageListItem
-              component={Link}
-              href={`/${item.project}`}
-              sx={{ display: 'block' }}
+            <motion.div
+              key={item.url}
+              initial={{ opacity: 0 }}
+              whileInView={{
+                opacity: 1,
+                transition: {
+                  type: 'spring',
+                  bounce: 0.25,
+                  duration: 2,
+                  delay: index * 0.2,
+                  ease: 'easeIn',
+                },
+              }}
+              viewport={{ once: true }}
             >
               <Image
                 src={item.url}
                 alt={item.title}
                 layout="responsive"
-                width={350}
-                height={250}
+                width={mediumWidth}
+                height={mediumHeight}
                 loader={myLoader}
                 placeholder="blur"
                 blurDataURL={placeholderImg}
                 className={classes.gimg}
               />
+            </motion.div>
+            <Grid
+              item
+              container
+              direction="row"
+              justifyContent="center"
+              sx={{
+                position: 'absolute',
+                bottom: 5,
 
-              <ImageListItemBar
-                sx={{ textAlign: 'center', p: 1, height: '30%' }}
-                title={item.title}
-                actionIcon={<VisibilityIcon sx={{ fill: 'white' }} />}
-              />
-            </ImageListItem>
-          </motion.div>
-        ))}
-      </ImageList>
-    </Box>
+                height: '2rem',
+              }}
+            >
+              <Stack
+                direction="row"
+                sx={{
+                  background: 'transparent',
+                  boxShadow: '2px 3px 3px 1px #48E7C3',
+                  width: '10rem',
+                  borderRadius: 1,
+                }}
+                alignItems="center"
+                justifyContent="space-around"
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight="bolder"
+                  sx={{ color: 'white' }}
+                >
+                  {item.title}
+                </Typography>
+                <VisibilityIcon sx={{ fill: 'white' }} />
+              </Stack>
+            </Grid>
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 }
 

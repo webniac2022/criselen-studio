@@ -14,59 +14,82 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Logo from '../logo/logo';
 import Stack from '@mui/material/Stack';
 import SwitchTheme from '../switch-theme-component/switch-theme';
+import Slide from '@mui/material/Slide';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import PropTypes from 'prop-types';
+import { Fragment } from 'react';
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
 
 function Header() {
   const { services } = useAppContext();
 
   return (
-    <>
-      <AppBar
-        position="sticky"
-        sx={{
-          background: 'transparent',
-        }}
-        elevation={0}
-      >
-        <Toolbar>
-          <Grid container direction="row" id="#back-to-top-anchor">
-            <Grid
-              item
-              container
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Grid item>
-                <IconButton
-                  size="small"
-                  edge="start"
-                  aria-label="home"
-                  disableRipple
-                >
-                  <Box
-                    component={Link}
-                    href="/"
-                    scroll={false}
-                    underline="none"
+    <Fragment>
+      <HideOnScroll>
+        <AppBar
+          position="sticky"
+          sx={{
+            background: 'transparent',
+          }}
+          elevation={0}
+        >
+          <Toolbar>
+            <Grid container direction="row" id="#back-to-top-anchor">
+              <Grid
+                item
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Grid item>
+                  <IconButton
+                    size="small"
+                    edge="start"
+                    aria-label="home"
+                    disableRipple
                   >
-                    <Stack direction="column" alignItems="center">
-                      <Logo />
-                      <Typography variant="h4">Criselen Studio</Typography>
-                    </Stack>
-                  </Box>
-                </IconButton>
-              </Grid>
-              <Grid item>
-                <SwitchTheme />
-              </Grid>
-              <Grid item component="div">
-                <Navbar navLinks={services} />
-                <SideDrawer navLinks={services} />
+                    <Box
+                      component={Link}
+                      href="/"
+                      scroll={false}
+                      underline="none"
+                    >
+                      <Stack direction="column" alignItems="center">
+                        <Logo />
+                        <Typography variant="h4">Criselen Studio</Typography>
+                      </Stack>
+                    </Box>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <SwitchTheme />
+                </Grid>
+                <Grid item component="div">
+                  <Navbar navLinks={services} />
+                  <SideDrawer navLinks={services} />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       <BackToTop>
         <Fab
           color="primary"
@@ -80,7 +103,7 @@ function Header() {
           <KeyboardArrowUpIcon sx={{ fill: '#48E7C3' }} />
         </Fab>
       </BackToTop>
-    </>
+    </Fragment>
   );
 }
 

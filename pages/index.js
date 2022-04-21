@@ -11,6 +11,7 @@ import About from '../components/about/about';
 import Contact from '../components/contact/contact';
 import Servicii from '../components/servicii/servicii';
 import Head from 'next/head';
+import Header from '../components/header/header';
 
 function Home({
   portfolio: { items: portfolio },
@@ -73,6 +74,7 @@ function Home({
 
   return (
     <>
+      <Header />
       <Head>
         <title>CRISELEN STUDIO - Servicii de design interior/exterior</title>
         <meta name="description" content="Design Cluj" />

@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import Header from '../components/header/header';
 
 const StyledParagraph = styled('p')({});
 
@@ -28,15 +29,20 @@ function Termeni({ termeni: { items } }) {
     },
   };
   return (
-    <Grid container>
-      <Grid item container p={4}>
-        {content.map((c, i) => {
-          return (
-            <div key={`${c}-${i}`}>{documentToReactComponents(c, options)}</div>
-          );
-        })}
+    <>
+      <Header />
+      <Grid container>
+        <Grid item container p={4}>
+          {content.map((c, i) => {
+            return (
+              <div key={`${c}-${i}`}>
+                {documentToReactComponents(c, options)}
+              </div>
+            );
+          })}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
 
