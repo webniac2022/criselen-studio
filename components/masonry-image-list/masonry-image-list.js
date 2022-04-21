@@ -60,40 +60,40 @@ function MasonryList({ itemData }) {
                 blurDataURL={placeholderImg}
                 className={classes.gimg}
               />
-            </motion.div>
-            <Grid
-              item
-              container
-              direction="row"
-              justifyContent="center"
-              sx={{
-                position: 'absolute',
-                bottom: 5,
-
-                height: '2rem',
-              }}
-            >
-              <Stack
+              <Grid
+                item
+                container
                 direction="row"
+                justifyContent="center"
                 sx={{
-                  background: 'transparent',
-                  boxShadow: '2px 3px 3px 1px #48E7C3',
-                  width: '10rem',
-                  borderRadius: 1,
+                  position: 'absolute',
+                  bottom: 10,
+
+                  height: '2rem',
                 }}
-                alignItems="center"
-                justifyContent="space-around"
               >
-                <Typography
-                  variant="h6"
-                  fontWeight="bolder"
-                  sx={{ color: 'white' }}
+                <Stack
+                  direction="row"
+                  sx={{
+                    background: 'transparent',
+                    boxShadow: '2px 3px 3px 1px #48E7C3',
+                    width: '10rem',
+                    borderRadius: 1,
+                  }}
+                  alignItems="center"
+                  justifyContent="space-around"
                 >
-                  {item.title}
-                </Typography>
-                <VisibilityIcon sx={{ fill: 'white' }} />
-              </Stack>
-            </Grid>
+                  <Typography
+                    variant="h6"
+                    fontWeight="bolder"
+                    sx={{ color: 'white' }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <VisibilityIcon sx={{ fill: 'white' }} />
+                </Stack>
+              </Grid>
+            </motion.div>
           </Grid>
         );
       })}

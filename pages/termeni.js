@@ -29,20 +29,15 @@ function Termeni({ termeni: { items } }) {
     },
   };
   return (
-    <>
-      <Header />
-      <Grid container>
-        <Grid item container p={4}>
-          {content.map((c, i) => {
-            return (
-              <div key={`${c}-${i}`}>
-                {documentToReactComponents(c, options)}
-              </div>
-            );
-          })}
-        </Grid>
+    <Grid container>
+      <Grid item container p={4}>
+        {content.map((c, i) => {
+          return (
+            <div key={`${c}-${i}`}>{documentToReactComponents(c, options)}</div>
+          );
+        })}
       </Grid>
-    </>
+    </Grid>
   );
 }
 

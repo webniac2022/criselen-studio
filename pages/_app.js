@@ -7,6 +7,7 @@ import { AppWrapper } from '../context/context';
 import ThemeWrapper from '../components/theme-wrapper/theme-wrapper';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
+import Header from '../components/header/header';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -28,6 +29,7 @@ function MyApp(props) {
         <ParallaxProvider>
           <ThemeWrapper>
             <CssBaseline />
+            <Header />
             <motion.main
               initial={{ opacity: 0, z: -200 }}
               animate={{ opacity: 1, z: 0 }}

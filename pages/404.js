@@ -1,39 +1,34 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
 import Link from '../components/link/link';
-import Header from '../components/header/header';
 
 function Custom404() {
   return (
-    <>
-      <Header />
-      <Grid container sx={{ minHeight: 350 }} justifyContent="center">
-        <Grid item container justifyContent="center" mt={5}>
-          <Typography variant="h3" align="center">
-            OOPS...something went wrong
-          </Typography>
-        </Grid>
-        <Grid item container justifyContent="center">
-          <Button
-            component={Link}
-            variant="contained"
-            href="/"
-            sx={{
-              width: 200,
-              height: 50,
-              textTransform: 'none',
-              fontSize: 25,
-              color: 'red',
-            }}
-            aria-label="back"
-          >
-            Go back
-          </Button>
-        </Grid>
+    <Grid container sx={{ minHeight: 350 }} justifyContent="center">
+      <Grid item container justifyContent="center" mt={5}>
+        <Typography variant="h3" align="center">
+          OOPS...something went wrong
+        </Typography>
       </Grid>
-    </>
+      <Grid item container justifyContent="center">
+        <Button
+          component={Link}
+          variant="contained"
+          href="/"
+          sx={{
+            width: 200,
+            height: 50,
+            textTransform: 'none',
+            fontSize: 25,
+            color: 'red',
+          }}
+          aria-label="back"
+        >
+          Go back
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
 
