@@ -23,7 +23,9 @@ function Project({ projectArr: { items } }) {
   return (
     <>
       <Head>
-        <title>{project}</title>
+        <title>Design interior Alba{project}</title>
+        <title>Design interior Cluj{project}</title>
+        <title>Servicii de design</title>
         <meta name="description" content={`Design interior Cluj ${project}`} />
         <meta name="description" content={`Design interior Alba ${project}`} />
         <meta

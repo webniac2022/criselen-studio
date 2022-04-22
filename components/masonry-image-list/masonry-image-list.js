@@ -19,6 +19,7 @@ function MasonryList({ itemData }) {
   const mediumWidth =
     itemData.reduce((first, second) => first + second.width, 0) /
     itemData.length;
+
   return (
     <Grid item container spacing={1} mt={5} p={1} mb={5}>
       {itemData.map((item, index) => {
