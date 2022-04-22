@@ -1,20 +1,22 @@
 import { useAppContext } from '../context/context';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import IconButton from '@mui/material/IconButton';
+import CircularProgress from '@mui/material/CircularProgress';
+import ModalImage from '../components/image-fullscreen-modal/modal-image';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const myLoader = ({ src, width, quality }) => {
   return `https:${src}?q=${quality || 95}`;
 };
 
 function Carousel() {
-  const { carouselInfo, setCarouselInfo } = useAppContext();
+  const { carouselInfo, setCarouselInfo, openModal, modal } = useAppContext();
   const { images, currentIndex } = carouselInfo;
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
   const [renderC, setRenderC] = useState(false);
@@ -50,6 +52,13 @@ function Carousel() {
 
   return (
     <Grid container>
+      {modal && (
+        <ModalImage
+          images={images}
+          currentIndex={currentIndex}
+          dimensions={dimensions}
+        />
+      )}
       {carouselInfo.images.length > 0 && renderC ? (
         <Grid
           item
@@ -59,6 +68,23 @@ function Carousel() {
           xs={12}
           sx={{ display: 'block', position: 'relative' }}
         >
+          <VisibilityIcon
+            onClick={openModal}
+            sx={{
+              width: '2.5rem',
+              height: '2.5rem',
+              position: 'absolute',
+              fill: '#48E7C3',
+              zIndex: 1200,
+              right: 5,
+              top: 10,
+              '&:hover': {
+                cursor: 'pointer',
+                transform: 'scaleX(1.05) scaleY(1.05)',
+                transition: '0.5s ease',
+              },
+            }}
+          />
           <Image
             src={images[currentIndex].url}
             alt={images[currentIndex].title}
@@ -81,7 +107,7 @@ function Carousel() {
                 sx={{ color: 'whitesmoke' }}
               >
                 <ArrowBackIosNewIcon
-                  sx={{ width: 40, height: 40, fill: '#48E7C3' }}
+                  sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
                 />
               </IconButton>
               <IconButton
@@ -90,15 +116,15 @@ function Carousel() {
                 sx={{ color: 'whitesmoke' }}
               >
                 <ArrowForwardIosIcon
-                  sx={{ width: 40, height: 40, fill: '#48E7C3' }}
+                  sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
                 />
               </IconButton>
             </Stack>
           </Box>
         </Grid>
       ) : (
-        <Grid item container>
-          Loading...
+        <Grid item container justifyContent="center">
+          <CircularProgress />
         </Grid>
       )}
     </Grid>

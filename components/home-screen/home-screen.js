@@ -28,7 +28,7 @@ function HomeScreen() {
           component={'a'}
           target="_blank"
           rel="noreferrer"
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/criselen studio"
           aria-label="Facebook"
         >
           <Image
@@ -50,7 +50,7 @@ function HomeScreen() {
           component={'a'}
           target="_blank"
           rel="noreferrer"
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/criselen.studio/"
           aria-label="Instagram"
         >
           <Image

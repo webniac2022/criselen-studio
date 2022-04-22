@@ -102,7 +102,7 @@ function Footer() {
               <Grid
                 item
                 component={'a'}
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/criselen.studio/"
                 target="_blank"
                 rel="noreferrer"
                 sx={{

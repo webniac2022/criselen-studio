@@ -10,6 +10,7 @@ export function AppWrapper({ children }) {
     images: [],
     currentIndex: 0,
   });
+  const [modal, setModalState] = useState(false);
 
   const [services, setServices] = useState([
     { title: 'Acasa', path: '/', tabIndex: 0 },
@@ -18,6 +19,14 @@ export function AppWrapper({ children }) {
     { title: 'Servicii', path: '/servicii', tabIndex: 3 },
     { title: 'Contact', path: '/contact', tabIndex: 4 },
   ]);
+
+  function openModal() {
+    setModalState(true);
+  }
+
+  function closeModal() {
+    setModalState(false);
+  }
 
   function toggleTheme() {
     setMode(mode === 'light' ? 'dark' : 'light');
@@ -39,6 +48,9 @@ export function AppWrapper({ children }) {
     closeSidebar,
     services,
     toggleTheme,
+    modal,
+    openModal,
+    closeModal,
     mode,
   };
   return <AppContext.Provider value={appState}>{children}</AppContext.Provider>;
