@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useSwipeable } from 'react-swipeable';
 
 const myLoader = ({ src, width, quality }) => {
   return `https:${src}?q=${quality || 95}`;
@@ -18,6 +19,10 @@ function Carousel() {
   const { images, currentIndex } = carouselInfo;
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
   const [renderC, setRenderC] = useState(false);
+  const handlers = useSwipeable({
+    onSwipedLeft: (eventData) => handleClickNext(),
+    onSwipedRight: (eventData) => handleClickPrev(),
+  });
 
   useEffect(() => {
     if (images.length > 0) {
@@ -52,6 +57,7 @@ function Carousel() {
     <Grid container>
       {carouselInfo.images.length > 0 && renderC ? (
         <Grid
+          {...handlers}
           item
           container
           direction="column"
