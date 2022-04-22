@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useAppContext } from '../../context/context';
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
-import Masonry from '@mui/lab/masonry';
+import Masonry from '@mui/lab/Masonry';
 
 const myLoader = ({ src, quality }) => {
   return `https:${src}?q=${quality || 95}`;
