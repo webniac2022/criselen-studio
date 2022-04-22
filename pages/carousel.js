@@ -15,7 +15,7 @@ const myLoader = ({ src, width, quality }) => {
 };
 
 function Carousel() {
-  const { carouselInfo, setCarouselInfo, openModal, modal } = useAppContext();
+  const { carouselInfo, setCarouselInfo } = useAppContext();
   const { images, currentIndex } = carouselInfo;
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
   const [renderC, setRenderC] = useState(false);
@@ -56,51 +56,92 @@ function Carousel() {
   return (
     <Grid container>
       {carouselInfo.images.length > 0 && renderC ? (
-        <Grid
-          {...handlers}
-          item
-          container
-          direction="column"
-          alignItems="center"
-          xs={12}
-          sx={{ display: 'block', position: 'relative' }}
-        >
-          <Image
-            src={images[currentIndex].url}
-            alt={images[currentIndex].title}
-            layout="responsive"
-            width={dimensions.w}
-            height={dimensions.h}
-            loader={myLoader}
-          />
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '40%',
-              width: '100%',
-            }}
+        <Grid item container>
+          <Grid
+            {...handlers}
+            item
+            container
+            direction="column"
+            alignItems="center"
+            xs={12}
+            sx={{ display: 'block', position: 'relative' }}
           >
-            <Stack direction="row" justifyContent="space-between" p={2}>
-              <IconButton
-                aria-label="previous picture"
-                onClick={handleClickPrev}
-                sx={{ color: 'whitesmoke' }}
-              >
-                <ArrowBackIosNewIcon
-                  sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
-                />
-              </IconButton>
-              <IconButton
-                aria-label="next picture"
-                onClick={handleClickNext}
-                sx={{ color: 'whitesmoke' }}
-              >
-                <ArrowForwardIosIcon
-                  sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
-                />
-              </IconButton>
-            </Stack>
-          </Box>
+            <Image
+              src={images[currentIndex].url}
+              alt={images[currentIndex].title}
+              layout="responsive"
+              width={dimensions.w}
+              height={dimensions.h}
+              loader={myLoader}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '40%',
+                width: '100%',
+              }}
+            >
+              <Stack direction="row" justifyContent="space-between" p={2}>
+                <IconButton
+                  aria-label="previous picture"
+                  onClick={handleClickPrev}
+                  sx={{ color: 'whitesmoke' }}
+                >
+                  <ArrowBackIosNewIcon
+                    sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
+                  />
+                </IconButton>
+                <IconButton
+                  aria-label="next picture"
+                  onClick={handleClickNext}
+                  sx={{ color: 'whitesmoke' }}
+                >
+                  <ArrowForwardIosIcon
+                    sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
+                  />
+                </IconButton>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid item container spacing={1} p={1}>
+            {images.map((img, i) => {
+              return (
+                <Grid item key={i} xs={3}>
+                  <Box
+                    sx={{
+                      display: 'block',
+                      border:
+                        i === currentIndex ? '1.5px solid #48E7C3' : 'none',
+                      opacity: i === currentIndex ? 0.85 : 1,
+                      '&:hover': {
+                        cursor: 'pointer',
+                        opacity: 0.7,
+                        transition: '0.3s ease',
+                      },
+                    }}
+                    onClick={() => {
+                      setCarouselInfo({ ...carouselInfo, currentIndex: i });
+                    }}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.title}
+                      layout="responsive"
+                      loader={myLoader}
+                      width={images.reduce(
+                        (add, next) => (add + next.width) / images.length,
+                        0
+                      )}
+                      height={images.reduce(
+                        (add, next) => (add + next.height) / images.length,
+                        0
+                      )}
+                    />
+                  </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
         </Grid>
       ) : (
         <Grid item container justifyContent="center">
