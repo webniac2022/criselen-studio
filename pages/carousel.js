@@ -9,12 +9,20 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSwipeable } from 'react-swipeable';
+import classes from '../styles/globals.module.css';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 
 const myLoader = ({ src, width, quality }) => {
   return `https:${src}?q=${quality || 95}`;
 };
 
 function Carousel() {
+  const controls = useAnimation();
+  const variants = {
+    initial: { x: 0 },
+    animate: { x: '-100%', transition: { duration: 1, ease: 'easeInOut' } },
+    exit: { x: 0 },
+  };
   const { carouselInfo, setCarouselInfo } = useAppContext();
   const { images, currentIndex } = carouselInfo;
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
@@ -66,14 +74,19 @@ function Carousel() {
             xs={12}
             sx={{ display: 'block', position: 'relative' }}
           >
-            <Image
-              src={images[currentIndex].url}
-              alt={images[currentIndex].title}
-              layout="responsive"
-              width={dimensions.w}
-              height={dimensions.h}
-              loader={myLoader}
-            />
+            <AnimatePresence exitBeforeEnter>
+              <motion.div variants={variants}>
+                <Image
+                  src={images[currentIndex].url}
+                  alt={images[currentIndex].title}
+                  layout="responsive"
+                  width={dimensions.w}
+                  height={dimensions.h}
+                  loader={myLoader}
+                />
+              </motion.div>
+            </AnimatePresence>
+
             <Box
               sx={{
                 position: 'absolute',
@@ -88,7 +101,11 @@ function Carousel() {
                   sx={{ color: 'whitesmoke' }}
                 >
                   <ArrowBackIosNewIcon
-                    sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
+                    sx={{
+                      width: '2.5rem',
+                      height: '2.5rem',
+                      fill: '#48E7C3',
+                    }}
                   />
                 </IconButton>
                 <IconButton
@@ -97,12 +114,17 @@ function Carousel() {
                   sx={{ color: 'whitesmoke' }}
                 >
                   <ArrowForwardIosIcon
-                    sx={{ width: '2.5rem', height: '2.5rem', fill: '#48E7C3' }}
+                    sx={{
+                      width: '2.5rem',
+                      height: '2.5rem',
+                      fill: '#48E7C3',
+                    }}
                   />
                 </IconButton>
               </Stack>
             </Box>
           </Grid>
+
           <Grid item container spacing={1} p={1}>
             {images.map((img, i) => {
               return (
@@ -110,6 +132,7 @@ function Carousel() {
                   <Box
                     sx={{
                       display: 'block',
+                      borderRadius: '5px',
                       border:
                         i === currentIndex ? '1.5px solid #48E7C3' : 'none',
                       opacity: i === currentIndex ? 0.85 : 1,
@@ -136,6 +159,7 @@ function Carousel() {
                         (add, next) => (add + next.height) / images.length,
                         0
                       )}
+                      className={classes.carouselImg}
                     />
                   </Box>
                 </Grid>

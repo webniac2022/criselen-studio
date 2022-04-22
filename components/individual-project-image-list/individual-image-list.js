@@ -6,6 +6,7 @@ import { useAppContext } from '../../context/context';
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
+import classes from '../../styles/globals.module.css';
 
 const myLoader = ({ src, quality }) => {
   return `https:${src}?q=${quality || 95}`;
@@ -47,6 +48,7 @@ function IndividualImgList({ itemData }) {
                   width={item.width}
                   height={item.height}
                   loader={myLoader}
+                  className={classes.carouselImg}
                   placeholder="blur"
                   blurDataURL={placeholderImg}
                 />
