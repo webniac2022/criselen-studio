@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: undefined
+Host: https://criselen-studio.ro
 
 # Sitemaps
-Sitemap: undefined/sitemap.xml
+Sitemap: https://criselen-studio.ro/sitemap.xml

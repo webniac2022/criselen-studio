@@ -10,26 +10,55 @@ import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSwipeable } from 'react-swipeable';
 import classes from '../styles/globals.module.css';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const myLoader = ({ src, width, quality }) => {
   return `https:${src}?q=${quality || 95}`;
 };
 
 function Carousel() {
-  const controls = useAnimation();
+  // framer animation
+  const [[page, direction], setPage] = useState([0, 0]);
   const variants = {
-    initial: { x: 0 },
-    animate: { x: '-100%', transition: { duration: 1, ease: 'easeInOut' } },
-    exit: { x: 0 },
+    enter: (direction) => {
+      return {
+        x: direction > 0 ? 1000 : -1000,
+        opacity: 0,
+      };
+    },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => {
+      return {
+        zIndex: 0,
+        x: direction < 0 ? 1000 : -1000,
+        opacity: 0,
+      };
+    },
   };
+
+  const paginate = (newDirection) => {
+    setPage([page + newDirection, newDirection]);
+  };
+
+  /* ------------------------------------------------------- */
+
   const { carouselInfo, setCarouselInfo } = useAppContext();
   const { images, currentIndex } = carouselInfo;
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
   const [renderC, setRenderC] = useState(false);
   const handlers = useSwipeable({
-    onSwipedLeft: (eventData) => handleClickNext(),
-    onSwipedRight: (eventData) => handleClickPrev(),
+    onSwipedLeft: (eventData) => {
+      handleClickNext();
+      paginate(1);
+    },
+    onSwipedRight: (eventData) => {
+      handleClickPrev();
+      paginate(-1);
+    },
   });
 
   useEffect(() => {
@@ -74,8 +103,20 @@ function Carousel() {
             xs={12}
             sx={{ display: 'block', position: 'relative' }}
           >
-            <AnimatePresence exitBeforeEnter>
-              <motion.div variants={variants}>
+            <AnimatePresence initial={false} custom={direction} exitBeforeEnter>
+              <motion.div
+                key={page}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  duration: 0.05,
+                  x: { type: 'spring', stiffness: 450, damping: 30 },
+                  // opacity: { duration: 0.05 },
+                }}
+              >
                 <Image
                   src={images[currentIndex].url}
                   alt={images[currentIndex].title}
@@ -97,7 +138,10 @@ function Carousel() {
               <Stack direction="row" justifyContent="space-between" p={2}>
                 <IconButton
                   aria-label="previous picture"
-                  onClick={handleClickPrev}
+                  onClick={() => {
+                    handleClickPrev();
+                    paginate(-1);
+                  }}
                   sx={{ color: 'whitesmoke' }}
                 >
                   <ArrowBackIosNewIcon
@@ -110,7 +154,10 @@ function Carousel() {
                 </IconButton>
                 <IconButton
                   aria-label="next picture"
-                  onClick={handleClickNext}
+                  onClick={() => {
+                    handleClickNext();
+                    paginate(-1);
+                  }}
                   sx={{ color: 'whitesmoke' }}
                 >
                   <ArrowForwardIosIcon
@@ -144,6 +191,7 @@ function Carousel() {
                     }}
                     onClick={() => {
                       setCarouselInfo({ ...carouselInfo, currentIndex: i });
+                      paginate(1);
                     }}
                   >
                     <Image

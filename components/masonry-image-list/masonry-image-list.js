@@ -69,7 +69,6 @@ function MasonryList({ itemData }) {
                 sx={{
                   position: 'absolute',
                   bottom: 10,
-
                   height: '2rem',
                 }}
               >
@@ -78,7 +77,7 @@ function MasonryList({ itemData }) {
                   sx={{
                     background: 'transparent',
                     boxShadow: '2px 3px 3px 1px #48E7C3',
-                    width: '10rem',
+                    minWidth: '50%',
                     borderRadius: 1,
                   }}
                   alignItems="center"
