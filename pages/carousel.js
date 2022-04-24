@@ -112,9 +112,10 @@ function Carousel() {
                 animate="center"
                 exit="exit"
                 transition={{
-                  duration: 0.05,
-                  x: { type: 'spring', stiffness: 450, damping: 30 },
-                  // opacity: { duration: 0.05 },
+                  duration: 0.15,
+                  type: 'spring',
+                  bounce: 0.3,
+                  ease: 'easeInOut',
                 }}
               >
                 <Image
@@ -156,7 +157,7 @@ function Carousel() {
                   aria-label="next picture"
                   onClick={() => {
                     handleClickNext();
-                    paginate(-1);
+                    paginate(1);
                   }}
                   sx={{ color: 'whitesmoke' }}
                 >
