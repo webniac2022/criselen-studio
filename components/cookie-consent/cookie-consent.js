@@ -1,4 +1,4 @@
-import CookieConsent from 'react-cookie-consent';
+import CookieConsent, { getCookieConsentValue } from 'react-cookie-consent';
 import Link from '../link/link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -40,9 +40,12 @@ function CookieConsentComponent() {
         alignItems: 'center',
         marginTop: 0,
       }}
+      onDecline={() => {}}
       declineButtonText="Refuz"
       expires={150}
       setDeclineCookie={false}
+      hideOnAccept={true}
+      hideOnDecline={false}
     >
       <Grid container direction="column">
         <Grid item container justifyContent="center">
