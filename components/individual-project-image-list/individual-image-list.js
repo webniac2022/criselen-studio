@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
 import classes from '../../styles/globals.module.css';
+import TouchAppIcon from '@mui/icons-material/TouchApp';
 
 const myLoader = ({ src, quality }) => {
   return `https:${src}?q=${quality || 95}`;
@@ -32,7 +33,11 @@ function IndividualImgList({ itemData }) {
               }}
             >
               <Box
-                sx={{ display: 'block', '&:hover': { cursor: 'pointer' } }}
+                sx={{
+                  display: 'block',
+                  position: 'relative',
+                  '&:hover': { cursor: 'pointer' },
+                }}
                 onClick={() => {
                   setCarouselInfo({
                     currentIndex: index,
