@@ -42,6 +42,7 @@ function CookieConsentComponent() {
       }}
       declineButtonText="Refuz"
       expires={150}
+      setDeclineCookie={false}
     >
       <Grid container direction="column">
         <Grid item container justifyContent="center">
