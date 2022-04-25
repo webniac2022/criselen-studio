@@ -42,7 +42,7 @@ function Contact() {
             </InputLabel>
             <Input
               sx={{
-                fontSize: 36,
+                fontSize: 20,
                 ':after': { borderBottomColor: 'rgba(56, 245, 197, 0.8)' },
               }}
               type="text"
@@ -60,7 +60,7 @@ function Contact() {
             </InputLabel>
             <Input
               sx={{
-                fontSize: 36,
+                fontSize: 20,
                 ':after': { borderBottomColor: 'rgba(56, 245, 197, 0.8)' },
               }}
               type="email"
@@ -78,7 +78,7 @@ function Contact() {
             </InputLabel>
             <Input
               sx={{
-                fontSize: 36,
+                fontSize: 20,
                 ':after': { borderBottomColor: 'rgba(56, 245, 197, 0.8)' },
               }}
               type="textarea"
