@@ -25,6 +25,8 @@ function Home({
   const portfolioRef = useRef(null);
   const servicesRef = useRef(null);
 
+  const metaPicUrl = `https://${portfolio[3].fields.presentationPic.fields.file.url}`;
+
   function handleScroll(url) {
     switch (url) {
       case '/despre':
@@ -81,6 +83,31 @@ function Home({
         <meta name="description" content="Designer" />
         <meta name="description" content="Cei mai buni designeri" />
         <meta name="description" content="Designer HORECA" />
+        <meta property="og:locale" content="ro_RO" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="CRISELEN STUDIO - Servicii de design interior si exterior"
+        />
+        <meta
+          property="og:description"
+          content="CRISELEN STUDIO - Servicii de design interior si exterior"
+        />
+        <meta property="og:url" content="https://criselen-studio.ro" />
+        <meta property="og:site_name" content="CRISELEN STUDIO" />
+        <meta property="og:image" content={`${metaPicUrl}`} />
+        <meta property="og:image:width" content="650" />
+        <meta property="og:image:height" content="488" />
+        <meta name="twitter:card" content="summary" />
+        <meta
+          name="twitter:description"
+          content="Servicii de design interior exterior - rezidential, HORECA"
+        />
+        <meta
+          name="twitter:title"
+          content="Servicii de design interior exterior - rezidential, HORECA"
+        />
+        <meta name="twitter:image" content={`${metaPicUrl}`} />
       </Head>
       <Grid container mt={10}>
         <Grid
